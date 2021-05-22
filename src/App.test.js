@@ -1,7 +1,7 @@
 // import { render, screen } from "@testing-library/react";
 import App from "./App";
 import { shallow } from "enzyme";
-import PersonList from "./Components/PersonList";
+import PersonList from "./Components/PersonList/PersonList";
 
 /* 
 --------THIS IS THE INITIAL TEST THAT COMES WITH JEST WHEN WE USE CREATE REACT APP--------
@@ -40,5 +40,14 @@ describe("App", () => {
   it("has a people property on state", () => {
     const appState = getAppComponentWrapper.state();
     expect(appState.people).toBeDefined();
+  });
+
+  it("passes the people prop pf the state as a prop to PersonList", () => {
+    const personList = getAppComponentWrapper.find(PersonList); // we get the PersonList component
+
+    expect(personList.props().people).toEqual(
+      // we check if the props have a "people" value which is equal to the "people" in the App's component state
+      getAppComponentWrapper.state().people
+    );
   });
 });
