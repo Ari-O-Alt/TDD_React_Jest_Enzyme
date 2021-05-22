@@ -17,14 +17,28 @@ test('renders learn react link', () => {
 // --- a test suite is a collection of tests
 describe("App", () => {
   // --- "it" signals the beginning of our (first) test
-  it("", () => {
-    const getAppComponentWrapper = shallow(<App />); // shallow only loads the App component, no children
+  // --- test that checks if we have the App component
+  // --- this is a test that runs before any other test, avoiding duplicate code since this is a common test for all tests
+  let getAppComponentWrapper;
+  beforeAll(() => {
+    getAppComponentWrapper = shallow(<App />); // shallow only loads the App component, no children
   });
 
+  // --- test that checks if the App component is rendering a PersonList component
   it("renders a component called PersonList", () => {
-    const getAppComponentWrapper = shallow(<App />);
-    const personList = getAppComponentWrapper.find(PersonList);
+    const personList = getAppComponentWrapper.find(PersonList); // returns an array
+    expect(personList).toHaveLength(1); // checks if we have exactly one component named PersonList
+  });
 
-    expect(personList).toHaveLength(1);
+  // --- test that checks is we have a state in our App component and for it not to be null
+  it("renders a component called PersonList", () => {
+    const appState = getAppComponentWrapper.state();
+    expect(appState).not.toBeNull();
+  });
+
+  // --- test that checks if we have a propery called "people" in our state
+  it("has a people property on state", () => {
+    const appState = getAppComponentWrapper.state();
+    expect(appState.people).toBeDefined();
   });
 });
