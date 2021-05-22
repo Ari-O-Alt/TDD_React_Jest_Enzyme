@@ -1,5 +1,3 @@
-# TDD_React_Jest_Enzyme
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
