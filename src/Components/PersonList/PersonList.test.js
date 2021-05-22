@@ -33,10 +33,20 @@ describe("PersonList", () => {
   // --- test that checks if the number of list items displayed is equal to the lenght of the "people" array
   it("displays all LIs", () => {
     const getPersonListWrapper = shallow(
-      <PersonList people={[{ name: "Alan" }, { name: "Jane" }]} />
+      <PersonList
+        people={[{ name: "Alan" }, { name: "Jane" }, { name: "Mary" }]}
+      />
     );
     const peopleInTheList = getPersonListWrapper.find("li"); // returns a collection
 
     expect(peopleInTheList).toHaveLength(peopleInTheList.length);
+  });
+
+  // --- test that checks if the people's names are displayed on the screen
+  it("it renders the first name of a person", () => {
+    const people = [{ name: "Alan" }];
+    const getPersonListWrapper = shallow(<PersonList people={people} />);
+    const personListItems = getPersonListWrapper.find("li"); // returns a collection
+    expect(personListItems.at(0).text()).toContain(people[0].name); // checks if the first LI of the collection displays the first name of the first item of the people array
   });
 });

@@ -7,11 +7,7 @@ const PersonList = (props) => {
     return <li key={index}>{person.name}</li>;
   });
 
-  if (people && (people.lenght = 0)) {
-    return <ul></ul>;
-  }
-
-  return <ul>{allPeople}</ul>;
+  return <ul>{people && people.lenght == 0 ? null : allPeople}</ul>;
 };
 
 export default PersonList;
